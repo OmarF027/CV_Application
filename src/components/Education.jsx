@@ -1,50 +1,33 @@
 import { useState } from "react";
 
-function Education() {
-  const [isEditing, setIsEditing] = useState(true);
-  const [school, setSchool] = useState("");
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
+export default function Education({ data, setData }) {
+  const [editing, setEditing] = useState(true);
+  const [edu, setEdu] = useState({ school: "", title: "", date: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsEditing(false);
+  const handleAdd = () => {
+    setData([...data, edu]);
+    setEdu({ school: "", title: "", date: "" });
   };
 
   return (
-    <div className="section">
-      <h2>Istruzione</h2>
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Nome scuola"
-            value={school}
-            onChange={(e) => setSchool(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Titolo di studio"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <button type="submit">Salva</button>
-        </form>
+    <div>
+      <h3>Formazione</h3>
+      {editing ? (
+        <>
+          <input placeholder="Scuola" value={edu.school} onChange={(e) => setEdu({ ...edu, school: e.target.value })} />
+          <input placeholder="Titolo di studio" value={edu.title} onChange={(e) => setEdu({ ...edu, title: e.target.value })} />
+          <input placeholder="Data" value={edu.date} onChange={(e) => setEdu({ ...edu, date: e.target.value })} />
+          <button onClick={handleAdd}>Aggiungi</button>
+          <button onClick={() => setEditing(false)}>Submit</button>
+        </>
       ) : (
-        <div>
-          <p><b>Scuola:</b> {school}</p>
-          <p><b>Titolo:</b> {title}</p>
-          <p><b>Data:</b> {date}</p>
-          <button onClick={() => setIsEditing(true)}>Modifica</button>
-        </div>
+        <>
+          {data.map((e, i) => (
+            <p key={i}><strong>{e.title}</strong> - {e.school} ({e.date})</p>
+          ))}
+          <button onClick={() => setEditing(true)}>Edit</button>
+        </>
       )}
     </div>
   );
 }
-
-export default Education;

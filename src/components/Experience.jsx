@@ -1,63 +1,35 @@
 import { useState } from "react";
 
-function Experience() {
-  const [isEditing, setIsEditing] = useState(true);
-  const [company, setCompany] = useState("");
-  const [position, setPosition] = useState("");
-  const [responsibilities, setResponsibilities] = useState("");
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateUntil, setDateUntil] = useState("");
+export default function Experience({ data, setData }) {
+  const [editing, setEditing] = useState(true);
+  const [exp, setExp] = useState({ company: "", position: "", responsibilities: "", from: "", to: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsEditing(false);
+  const handleAdd = () => {
+    setData([...data, exp]);
+    setExp({ company: "", position: "", responsibilities: "", from: "", to: "" });
   };
 
   return (
-    <div className="section">
-      <h2>Esperienza Lavorativa</h2>
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Azienda"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Posizione"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-          />
-          <textarea
-            placeholder="Responsabilità"
-            value={responsibilities}
-            onChange={(e) => setResponsibilities(e.target.value)}
-          />
-          <input
-            type="date"
-            value={dateFrom}
-            onChange={(e) => setDateFrom(e.target.value)}
-          />
-          <input
-            type="date"
-            value={dateUntil}
-            onChange={(e) => setDateUntil(e.target.value)}
-          />
-          <button type="submit">Salva</button>
-        </form>
+    <div>
+      <h3>Esperienza Lavorativa</h3>
+      {editing ? (
+        <>
+          <input placeholder="Azienda" value={exp.company} onChange={(e) => setExp({ ...exp, company: e.target.value })} />
+          <input placeholder="Posizione" value={exp.position} onChange={(e) => setExp({ ...exp, position: e.target.value })} />
+          <input placeholder="Responsabilità" value={exp.responsibilities} onChange={(e) => setExp({ ...exp, responsibilities: e.target.value })} />
+          <input placeholder="Da" value={exp.from} onChange={(e) => setExp({ ...exp, from: e.target.value })} />
+          <input placeholder="A" value={exp.to} onChange={(e) => setExp({ ...exp, to: e.target.value })} />
+          <button onClick={handleAdd}>Aggiungi</button>
+          <button onClick={() => setEditing(false)}>Submit</button>
+        </>
       ) : (
-        <div>
-          <p><b>Azienda:</b> {company}</p>
-          <p><b>Posizione:</b> {position}</p>
-          <p><b>Responsabilità:</b> {responsibilities}</p>
-          <p><b>Periodo:</b> {dateFrom} - {dateUntil}</p>
-          <button onClick={() => setIsEditing(true)}>Modifica</button>
-        </div>
+        <>
+          {data.map((e, i) => (
+            <p key={i}><strong>{e.position}</strong> - {e.company} ({e.from} - {e.to})<br />{e.responsibilities}</p>
+          ))}
+          <button onClick={() => setEditing(true)}>Edit</button>
+        </>
       )}
     </div>
   );
 }
-
-export default Experience;
