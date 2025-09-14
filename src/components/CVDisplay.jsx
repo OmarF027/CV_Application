@@ -65,6 +65,14 @@ export default function CVDisplay({ data }) {
             {ed.date && <p>{ed.date}</p>}
           </div>
         ))}
+
+        {/* Dichiarazione privacy */}
+        <div className="privacy-notice">
+          <p>
+            Autorizzo il trattamento dei miei dati personali ai sensi del
+            Regolamento UE 2016/679 (GDPR).
+          </p>
+        </div>
       </div>
     </div>
   );

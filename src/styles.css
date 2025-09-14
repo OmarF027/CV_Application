@@ -163,20 +163,26 @@ button:hover {
   color: #fff;
 }
 
+.btn.default {
+  background-color: #3498db;
+  color: #fff;
+}
+
 .btn.save {
   background-color: #2ecc71;
   color: #fff;
 }
 
 .btn.print {
-  background-color: #3498db;
+  background-color: #7f8c8d;
   color: #fff;
 }
 
 .buttons {
   margin-top: 1rem;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .left-panel::-webkit-scrollbar,
@@ -188,6 +194,13 @@ button:hover {
 .right-panel::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,0.2);
   border-radius: 4px;
+}
+
+.privacy-notice {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 1rem;
+  font-style: italic;
 }
 
 /* RESPONSIVE */
@@ -222,6 +235,7 @@ button:hover {
 /* --- PRINT --- */
 @media print {
   .left-panel { display: none; }
+
   .right-panel {
     position: absolute;
     top: 0;
@@ -246,12 +260,19 @@ button:hover {
     color: #ecf0f1;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    padding: 1rem;
   }
 
   .cv-right {
     flex: 3 1 75%;
     min-width: 600px;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cv-right .summary {
+    margin-bottom: 0.5rem; 
   }
 
   body {
@@ -259,3 +280,4 @@ button:hover {
     print-color-adjust: exact;
   }
 }
+

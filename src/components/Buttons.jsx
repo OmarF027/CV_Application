@@ -1,9 +1,8 @@
 import html2pdf from "html2pdf.js";
 
-export default function Buttons({ resetData }) {
-
+export default function Buttons({ resetData, loadDefault }) {
   function savePDF() {
-    const element = document.querySelector(".cv-container"); // seleziona il CV
+    const element = document.querySelector(".cv-container");
     const options = {
       margin: 0.5,
       filename: "cv.pdf",
@@ -23,9 +22,15 @@ export default function Buttons({ resetData }) {
       <button onClick={resetData} className="btn clear">
         Clear
       </button>
+
+      <button onClick={loadDefault} className="btn default">
+        Default
+      </button>
+
       <button onClick={savePDF} className="btn save">
         Salva PDF
       </button>
+
       <button onClick={printCV} className="btn print">
         Stampa
       </button>
