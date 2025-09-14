@@ -168,6 +168,11 @@ button:hover {
   color: #fff;
 }
 
+.btn.print {
+  background-color: #3498db;
+  color: #fff;
+}
+
 .buttons {
   margin-top: 1rem;
   display: flex;
