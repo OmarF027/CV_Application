@@ -1,4 +1,7 @@
+import React from "react";
+
 export default function Education({ data, setData }) {
+  // Aggiunge una nuova voce di formazione
   function addEducation() {
     setData((prev) => ({
       ...prev,
@@ -6,35 +9,41 @@ export default function Education({ data, setData }) {
     }));
   }
 
-  function handleChange(i, field, value) {
-    const newEd = [...data.education];
-    newEd[i][field] = value;
-    setData((prev) => ({ ...prev, education: newEd }));
+  // Gestisce i cambiamenti dei campi input
+  function handleChange(index, field, value) {
+    const newEducation = [...data.education];
+    newEducation[index][field] = value;
+    setData((prev) => ({ ...prev, education: newEducation }));
   }
 
   return (
-    <div>
+    <div className="education-section">
       <h2>Formazione</h2>
       {data.education.map((ed, i) => (
-        <div key={i}>
+        <div key={i} className="education-item">
           <input
+            type="text"
             placeholder="School"
-            value={ed.school}
+            value={ed.school || ""}
             onChange={(e) => handleChange(i, "school", e.target.value)}
           />
           <input
+            type="text"
             placeholder="Degree"
-            value={ed.degree}
+            value={ed.degree || ""}
             onChange={(e) => handleChange(i, "degree", e.target.value)}
           />
           <input
+            type="text"
             placeholder="Date"
-            value={ed.date}
+            value={ed.date || ""}
             onChange={(e) => handleChange(i, "date", e.target.value)}
           />
         </div>
       ))}
-      <button onClick={addEducation}>+ Aggiungi</button>
+      <button type="button" className="btn add" onClick={addEducation}>
+        + Aggiungi
+      </button>
     </div>
   );
 }

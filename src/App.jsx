@@ -2,6 +2,7 @@ import { useState } from "react";
 import Profile from "./components/Profile";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
+import Skills from "./components/Skills";
 import CVDisplay from "./components/CVDisplay";
 import Buttons from "./components/Buttons";
 import "./styles.css";
@@ -49,6 +50,7 @@ export default function App() {
         <Profile data={data} setData={setData} />
         <Experience data={data} setData={setData} />
         <Education data={data} setData={setData} />
+        <Skills data={data} setData={setData} />
         <Buttons resetData={resetData} />
       </div>
       <div className="right-panel">

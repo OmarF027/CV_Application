@@ -1,29 +1,30 @@
+import React from "react";
+
 export default function CVDisplay({ data }) {
-  const p = data.profile;
+  const p = data.profile || {};
 
   return (
     <div className="cv-container">
       {/* Colonna sinistra */}
       <div className="cv-left">
-        {p.picture && (
-          <img src={p.picture} alt="Profile" className="cv-photo" />
-        )}
+        {p.picture && <img src={p.picture} alt="Profile" className="cv-photo" />}
+
         <h3>Contatti</h3>
-        <p>{p.email}</p>
-        <p>{p.phone}</p>
-        <p>{p.address}</p>
-        <p>{p.website}</p>
+        {p.email && <p>{p.email}</p>}
+        {p.phone && <p>{p.phone}</p>}
+        {p.address && <p>{p.address}</p>}
+        {p.website && <p>{p.website}</p>}
 
         <h3>Skills</h3>
         <ul>
-          {data.skills.map((s, i) => (
+          {(data.skills || []).map((s, i) => (
             <li key={i}>{s}</li>
           ))}
         </ul>
 
         <h3>Lingue</h3>
         <ul>
-          {data.languages.map((l, i) => (
+          {(data.languages || []).map((l, i) => (
             <li key={i}>{l}</li>
           ))}
         </ul>
@@ -32,30 +33,36 @@ export default function CVDisplay({ data }) {
       {/* Colonna destra */}
       <div className="cv-right">
         <h1>
-          {p.firstName} {p.lastName}
+          {p.firstName || ""} {p.lastName || ""}
         </h1>
-        <p className="summary">{p.summary}</p>
+        {p.summary && <p className="summary">{p.summary}</p>}
 
         <h2>Esperienza</h2>
-        {data.experience.map((ex, i) => (
+        {(data.experience || []).map((ex, i) => (
           <div key={i}>
             <h3>
-              {ex.position} - {ex.company}
+              {ex.position && <span>{ex.position}</span>}
+              {ex.position && ex.company && <span> - </span>}
+              {ex.company && <span>{ex.company}</span>}
             </h3>
             <p>
-              {ex.from} – {ex.to}
+              {ex.from && <span>{ex.from}</span>}
+              {ex.from && ex.to && <span> – </span>}
+              {ex.to && <span>{ex.to}</span>}
             </p>
-            <p>{ex.tasks}</p>
+            {ex.tasks && <p>{ex.tasks}</p>}
           </div>
         ))}
 
         <h2>Formazione</h2>
-        {data.education.map((ed, i) => (
+        {(data.education || []).map((ed, i) => (
           <div key={i}>
             <h3>
-              {ed.degree}, {ed.school}
+              {ed.degree && <span>{ed.degree}</span>}
+              {ed.degree && ed.school && <span>, </span>}
+              {ed.school && <span>{ed.school}</span>}
             </h3>
-            <p>{ed.date}</p>
+            {ed.date && <p>{ed.date}</p>}
           </div>
         ))}
       </div>
