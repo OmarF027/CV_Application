@@ -1,30 +1,66 @@
-import { useState } from "react";
-
 export default function Profile({ data, setData }) {
-  const [editing, setEditing] = useState(true);
+  const p = data.profile;
 
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+  function handleChange(field, value) {
+    setData((prev) => ({
+      ...prev,
+      profile: { ...prev.profile, [field]: value },
+    }));
+  }
+
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => handleChange("picture", reader.result);
+    reader.readAsDataURL(file);
+  }
 
   return (
     <div>
-      <h3>Informazioni Generali</h3>
-      {editing ? (
-        <>
-          <input name="name" placeholder="Nome" value={data.name} onChange={handleChange} />
-          <input name="email" placeholder="Email" value={data.email} onChange={handleChange} />
-          <input name="phone" placeholder="Telefono" value={data.phone} onChange={handleChange} />
-          <button onClick={() => setEditing(false)}>Submit</button>
-        </>
-      ) : (
-        <>
-          <p><strong>Nome:</strong> {data.name}</p>
-          <p><strong>Email:</strong> {data.email}</p>
-          <p><strong>Telefono:</strong> {data.phone}</p>
-          <button onClick={() => setEditing(true)}>Edit</button>
-        </>
-      )}
+      <h2>Informazioni</h2>
+      <input
+        type="text"
+        placeholder="First Name"
+        value={p.firstName}
+        onChange={(e) => handleChange("firstName", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        value={p.lastName}
+        onChange={(e) => handleChange("lastName", e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={p.email}
+        onChange={(e) => handleChange("email", e.target.value)}
+      />
+      <input
+        type="tel"
+        placeholder="Phone"
+        value={p.phone}
+        onChange={(e) => handleChange("phone", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Address"
+        value={p.address}
+        onChange={(e) => handleChange("address", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Website"
+        value={p.website}
+        onChange={(e) => handleChange("website", e.target.value)}
+      />
+      <textarea
+        placeholder="Summary"
+        value={p.summary}
+        onChange={(e) => handleChange("summary", e.target.value)}
+      />
+      <input type="file" accept="image/*" onChange={handleImageChange} />
     </div>
   );
 }

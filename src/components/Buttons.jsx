@@ -1,12 +1,16 @@
-export default function Buttons({ clearAll }) {
-  const savePDF = () => {
+export default function Buttons({ resetData }) {
+  function savePDF() {
     window.print();
-  };
+  }
 
   return (
-    <div style={{ marginTop: "1rem" }}>
-      <button onClick={clearAll}>CLEAR</button>
-      <button onClick={savePDF} style={{ marginLeft: "1rem" }}>STAMPA PDF</button>
+    <div className="buttons">
+      <button onClick={resetData} className="btn clear">
+        Clear
+      </button>
+      <button onClick={savePDF} className="btn save">
+        Save PDF
+      </button>
     </div>
   );
 }

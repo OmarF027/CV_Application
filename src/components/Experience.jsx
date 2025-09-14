@@ -1,35 +1,53 @@
-import { useState } from "react";
-
 export default function Experience({ data, setData }) {
-  const [editing, setEditing] = useState(true);
-  const [exp, setExp] = useState({ company: "", position: "", responsibilities: "", from: "", to: "" });
+  function addExperience() {
+    setData((prev) => ({
+      ...prev,
+      experience: [
+        ...prev.experience,
+        { company: "", position: "", tasks: "", from: "", to: "" },
+      ],
+    }));
+  }
 
-  const handleAdd = () => {
-    setData([...data, exp]);
-    setExp({ company: "", position: "", responsibilities: "", from: "", to: "" });
-  };
+  function handleChange(i, field, value) {
+    const newExp = [...data.experience];
+    newExp[i][field] = value;
+    setData((prev) => ({ ...prev, experience: newExp }));
+  }
 
   return (
     <div>
-      <h3>Esperienza Lavorativa</h3>
-      {editing ? (
-        <>
-          <input placeholder="Azienda" value={exp.company} onChange={(e) => setExp({ ...exp, company: e.target.value })} />
-          <input placeholder="Posizione" value={exp.position} onChange={(e) => setExp({ ...exp, position: e.target.value })} />
-          <input placeholder="Responsabilità" value={exp.responsibilities} onChange={(e) => setExp({ ...exp, responsibilities: e.target.value })} />
-          <input placeholder="Da" value={exp.from} onChange={(e) => setExp({ ...exp, from: e.target.value })} />
-          <input placeholder="A" value={exp.to} onChange={(e) => setExp({ ...exp, to: e.target.value })} />
-          <button onClick={handleAdd}>Aggiungi</button>
-          <button onClick={() => setEditing(false)}>Submit</button>
-        </>
-      ) : (
-        <>
-          {data.map((e, i) => (
-            <p key={i}><strong>{e.position}</strong> - {e.company} ({e.from} - {e.to})<br />{e.responsibilities}</p>
-          ))}
-          <button onClick={() => setEditing(true)}>Edit</button>
-        </>
-      )}
+      <h2>Esperienza</h2>
+      {data.experience.map((ex, i) => (
+        <div key={i}>
+          <input
+            placeholder="Company"
+            value={ex.company}
+            onChange={(e) => handleChange(i, "company", e.target.value)}
+          />
+          <input
+            placeholder="Position"
+            value={ex.position}
+            onChange={(e) => handleChange(i, "position", e.target.value)}
+          />
+          <textarea
+            placeholder="Tasks"
+            value={ex.tasks}
+            onChange={(e) => handleChange(i, "tasks", e.target.value)}
+          />
+          <input
+            placeholder="From"
+            value={ex.from}
+            onChange={(e) => handleChange(i, "from", e.target.value)}
+          />
+          <input
+            placeholder="To"
+            value={ex.to}
+            onChange={(e) => handleChange(i, "to", e.target.value)}
+          />
+        </div>
+      ))}
+      <button onClick={addExperience}>+ Aggiungi</button>
     </div>
   );
 }

@@ -1,33 +1,40 @@
-import { useState } from "react";
-
 export default function Education({ data, setData }) {
-  const [editing, setEditing] = useState(true);
-  const [edu, setEdu] = useState({ school: "", title: "", date: "" });
+  function addEducation() {
+    setData((prev) => ({
+      ...prev,
+      education: [...prev.education, { school: "", degree: "", date: "" }],
+    }));
+  }
 
-  const handleAdd = () => {
-    setData([...data, edu]);
-    setEdu({ school: "", title: "", date: "" });
-  };
+  function handleChange(i, field, value) {
+    const newEd = [...data.education];
+    newEd[i][field] = value;
+    setData((prev) => ({ ...prev, education: newEd }));
+  }
 
   return (
     <div>
-      <h3>Formazione</h3>
-      {editing ? (
-        <>
-          <input placeholder="Scuola" value={edu.school} onChange={(e) => setEdu({ ...edu, school: e.target.value })} />
-          <input placeholder="Titolo di studio" value={edu.title} onChange={(e) => setEdu({ ...edu, title: e.target.value })} />
-          <input placeholder="Data" value={edu.date} onChange={(e) => setEdu({ ...edu, date: e.target.value })} />
-          <button onClick={handleAdd}>Aggiungi</button>
-          <button onClick={() => setEditing(false)}>Submit</button>
-        </>
-      ) : (
-        <>
-          {data.map((e, i) => (
-            <p key={i}><strong>{e.title}</strong> - {e.school} ({e.date})</p>
-          ))}
-          <button onClick={() => setEditing(true)}>Edit</button>
-        </>
-      )}
+      <h2>Formazione</h2>
+      {data.education.map((ed, i) => (
+        <div key={i}>
+          <input
+            placeholder="School"
+            value={ed.school}
+            onChange={(e) => handleChange(i, "school", e.target.value)}
+          />
+          <input
+            placeholder="Degree"
+            value={ed.degree}
+            onChange={(e) => handleChange(i, "degree", e.target.value)}
+          />
+          <input
+            placeholder="Date"
+            value={ed.date}
+            onChange={(e) => handleChange(i, "date", e.target.value)}
+          />
+        </div>
+      ))}
+      <button onClick={addEducation}>+ Aggiungi</button>
     </div>
   );
 }

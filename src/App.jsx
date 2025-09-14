@@ -6,30 +6,54 @@ import CVDisplay from "./components/CVDisplay";
 import Buttons from "./components/Buttons";
 import "./styles.css";
 
-function App() {
-  const [profile, setProfile] = useState({ name: "", email: "", phone: "" });
-  const [education, setEducation] = useState([]);
-  const [experience, setExperience] = useState([]);
+export default function App() {
+  const [data, setData] = useState({
+    profile: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      website: "",
+      summary: "",
+      picture: null,
+    },
+    education: [],
+    experience: [],
+    skills: [],
+    languages: [],
+  });
 
-  const clearAll = () => {
-    setProfile({ name: "", email: "", phone: "" });
-    setEducation([]);
-    setExperience([]);
-  };
+  function resetData() {
+    setData({
+      profile: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        website: "",
+        summary: "",
+        picture: null,
+      },
+      education: [],
+      experience: [],
+      skills: [],
+      languages: [],
+    });
+  }
 
   return (
     <div className="container">
       <div className="left-panel">
-        <Profile data={profile} setData={setProfile} />
-        <Education data={education} setData={setEducation} />
-        <Experience data={experience} setData={setExperience} />
+        <Profile data={data} setData={setData} />
+        <Experience data={data} setData={setData} />
+        <Education data={data} setData={setData} />
+        <Buttons resetData={resetData} />
       </div>
       <div className="right-panel">
-        <CVDisplay profile={profile} education={education} experience={experience} />
-        <Buttons clearAll={clearAll} />
+        <CVDisplay data={data} />
       </div>
     </div>
   );
 }
-
-export default App;

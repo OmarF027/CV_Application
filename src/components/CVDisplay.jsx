@@ -1,19 +1,64 @@
-export default function CVDisplay({ profile, education, experience }) {
+export default function CVDisplay({ data }) {
+  const p = data.profile;
+
   return (
-    <div>
-      <h2>Curriculum Vitae</h2>
-      <h3>{profile.name}</h3>
-      <p>{profile.email} | {profile.phone}</p>
+    <div className="cv-container">
+      {/* Colonna sinistra */}
+      <div className="cv-left">
+        {p.picture && (
+          <img src={p.picture} alt="Profile" className="cv-photo" />
+        )}
+        <h3>Contatti</h3>
+        <p>{p.email}</p>
+        <p>{p.phone}</p>
+        <p>{p.address}</p>
+        <p>{p.website}</p>
 
-      <h4>Educazione</h4>
-      {education.map((e, i) => (
-        <p key={i}><strong>{e.title}</strong> - {e.school} ({e.date})</p>
-      ))}
+        <h3>Skills</h3>
+        <ul>
+          {data.skills.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ul>
 
-      <h4>Esperienza Lavorativa</h4>
-      {experience.map((e, i) => (
-        <p key={i}><strong>{e.position}</strong> - {e.company} ({e.from} - {e.to})<br />{e.responsibilities}</p>
-      ))}
+        <h3>Lingue</h3>
+        <ul>
+          {data.languages.map((l, i) => (
+            <li key={i}>{l}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Colonna destra */}
+      <div className="cv-right">
+        <h1>
+          {p.firstName} {p.lastName}
+        </h1>
+        <p className="summary">{p.summary}</p>
+
+        <h2>Esperienza</h2>
+        {data.experience.map((ex, i) => (
+          <div key={i}>
+            <h3>
+              {ex.position} - {ex.company}
+            </h3>
+            <p>
+              {ex.from} – {ex.to}
+            </p>
+            <p>{ex.tasks}</p>
+          </div>
+        ))}
+
+        <h2>Formazione</h2>
+        {data.education.map((ed, i) => (
+          <div key={i}>
+            <h3>
+              {ed.degree}, {ed.school}
+            </h3>
+            <p>{ed.date}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
