@@ -17,7 +17,7 @@ export default function App() {
       address: "Roma, Italia",
       website: "Portfolio: omarfrosalidev.com",
       summary:
-        "Junior Developer con solide competenze in HTML, CSS, PHP, JavaScript, Node.js e MySQL con esperienza nella creazione di applicazioni web complete e responsive. Portfolio dimostrativo di progetti funzionali con integrazione database e API. Certificazioni in Responsive Web Design e Foundational C# (freeCodeCamp). Cerco un'opportunità Junior in un team dove poter apprendere, mettere in pratica le mie capacità e contribuire a progetti concreti. Disponibile a trasferirmi.",
+        "Junior Developer con solide competenze in HTML, CSS, PHP, JavaScript, Node.js, MySQL e React, con esperienza nella creazione di applicazioni web complete e responsive. Portfolio dimostrativo di progetti funzionali con integrazione database e API. Certificazioni in Responsive Web Design e Foundational C# (freeCodeCamp). Cerco un'opportunità Junior in un team dove poter apprendere, mettere in pratica le mie capacità e contribuire a progetti concreti. Disponibile a trasferirmi.",
       picture: "/1686118615378.jpg", // mettila nella cartella public
     },
     experience: [
