@@ -5,4 +5,4 @@ Include sezioni per **Profilo**, **Istruzione** e **Esperienza Lavorativa** con 
 
 Progetto sviluppato nell’ambito del corso di [The Odin Project](https://www.theodinproject.com/).
 
-Link alla preview: https://omarfcvapplication.netlify.app/
+Prova la demo su Netlify: https://omarfcvapplication.netlify.app/
